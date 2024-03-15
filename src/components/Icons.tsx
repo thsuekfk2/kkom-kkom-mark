@@ -67,22 +67,6 @@ export const CloseIcon = (props: ComponentProps<"svg">) => {
   );
 };
 
-export const PlusIcon = (props: ComponentProps<"svg">) => {
-  return (
-    <svg
-      fill="currentColor"
-      viewBox="0 0 16 16"
-      height="1em"
-      width="1em"
-      {...props}
-    >
-      <path
-        fillRule="evenodd"
-        d="M8 2a.5.5 0 01.5.5v5h5a.5.5 0 010 1h-5v5a.5.5 0 01-1 0v-5h-5a.5.5 0 010-1h5v-5A.5.5 0 018 2z"
-      />
-    </svg>
-  );
-};
 export const MemoIcon = (props: ComponentProps<"svg">) => {
   return (
     <svg
@@ -106,6 +90,44 @@ export const MemoIcon = (props: ComponentProps<"svg">) => {
         strokeLinejoin="round"
         strokeWidth={32}
         d="M256 56v120a32 32 0 0032 32h120M176 288h160M176 368h160"
+      />
+    </svg>
+  );
+};
+
+export const LoadingIcon = (props: ComponentProps<"svg">) => {
+  return (
+    <div className="flex items-center space-x-2">
+      <div aria-label="Loading..." role="status">
+        <svg
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          viewBox="0 0 24 24"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-4 h-4 animate-spin strokeSlate-500"
+          {...props}
+        >
+          <path d="M12 3v3m6.366-.366-2.12 2.12M21 12h-3m.366 6.366-2.12-2.12M12 21v-3m-6.366.366 2.12-2.12M3 12h3m-.366-6.366 2.12 2.12"></path>
+        </svg>
+      </div>
+      <span className="text-xs font-medium text-slate-500">Loading...</span>
+    </div>
+  );
+};
+
+export const PlusIcon = (props: ComponentProps<"svg">) => {
+  return (
+    <svg viewBox="0 0 512 512" fill="currentColor" {...props}>
+      <path
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={32}
+        d="M256 112v288M400 256H112"
       />
     </svg>
   );
