@@ -18,9 +18,9 @@ export const BookmarkList = () => {
     updateList(fetchData);
   };
 
-  const deleteBookmark = (url: string) => {
-    bookmarkService.delete(url);
-    loadBookmarks();
+  const deleteBookmark = async (url: string) => {
+    await bookmarkService.delete(url);
+    await loadBookmarks();
   };
 
   return list[bookmarkPage]?.map((data: BookmarkListType) => (

@@ -28,7 +28,7 @@ export const Popup = () => {
   };
 
   const saveBookmark = async () => {
-    bookmarkService.create(url);
+    await bookmarkService.create(url);
     await loadBookmarks();
   };
 
