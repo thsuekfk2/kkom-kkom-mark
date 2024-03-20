@@ -1,21 +1,27 @@
 import { defineManifest } from "@crxjs/vite-plugin";
-
 import packageJson from "./package.json";
+import { loadEnv } from "vite";
 const { version } = packageJson;
 
 const [major, minor, patch, label = "0"] = version
   .replace(/[^\d.-]+/g, "")
   .split(/[.-]/);
 
-export default defineManifest(async (env) => ({
+const env = loadEnv("staging", process.cwd(), "");
+
+export default defineManifest(async (config) => ({
   manifest_version: 3,
-  name: env.mode === "staging" ? "[INTERNAL] Tools - EXE" : "Tools - EXE",
+  name: config.mode === "staging" ? "[INTERNAL] Tools - EXE" : "Tools - EXE",
   description: "응용프로그램 EXE App",
   version:
     label === "0"
       ? `${major}.${minor}.${patch}`
       : `${major}.${minor}.${patch}.${label}`,
   version_name: version,
+  oauth2: {
+    client_id: env.VITE_APP_GOOGLE_CLIENT_KEY,
+    scopes: ["openid", "email", "profile"],
+  },
   action: {
     default_title: "popup",
     default_popup: "src/pages/popup/index.html",
@@ -41,5 +47,5 @@ export default defineManifest(async (env) => ({
       matches: ["*://*/*"],
     },
   ],
-  permissions: ["storage", "scripting", "activeTab"],
+  permissions: ["storage", "scripting", "activeTab", "identity", "storage"],
 }));
