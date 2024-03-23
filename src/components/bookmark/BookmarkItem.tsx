@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { bookmarkService } from "../../service/bookmark.servce";
+import { bookmarkService } from "../../service/bookmark.service";
 import { BookmarkListType, useActions } from "../../store/bookmark";
 import { ToolTip } from "../ui/ToolTip";
 import { Input } from "@chakra-ui/react";
@@ -13,8 +13,8 @@ export const BookmarkItem = ({ data }: { data: BookmarkListType }) => {
   };
 
   const loadBookmarks = async () => {
-    const fetchData = await bookmarkService.fetch();
-    updateList(fetchData);
+    const { data } = await bookmarkService.fetch();
+    updateList(data);
   };
 
   const saveDescription = async (url: string) => {

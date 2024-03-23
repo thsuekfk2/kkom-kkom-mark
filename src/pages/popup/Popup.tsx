@@ -23,13 +23,8 @@ export const Popup = () => {
   }, []);
 
   const loadBookmarks = async () => {
-    const fetchData = await bookmarkService.fetch();
-    updateList(fetchData);
-  };
-
-  const saveBookmark = async () => {
-    await bookmarkService.create(url);
-    await loadBookmarks();
+    const { data } = await bookmarkService.fetch();
+    updateList(data);
   };
 
   return (
