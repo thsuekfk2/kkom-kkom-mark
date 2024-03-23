@@ -70,8 +70,7 @@ export const Popup = () => {
             )}
           </div>
           <div className="h-[340px] overflow-auto w-full">
-      <div className="flex flex-col h-[340px] items-center gap-2 overflow-auto">
-        {list.length <= 0 && <LoadingIcon widths={24} height={24} />}
+            <Search />
             <BookmarkList />
           </div>
           <Pagination />

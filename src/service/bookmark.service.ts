@@ -31,4 +31,12 @@ export const bookmarkService = {
     if (error) throw new Error(`에러!! ${error.message}`);
     return { data, error };
   },
+  select: async (text: string) => {
+    const { data, error } = await supabase
+      .from("url")
+      .select("*")
+      .or(`url.ilike.*${text}*,description.ilike.*${text}*`)
+      .order("id");
+    return { data, error };
+  },
 };
