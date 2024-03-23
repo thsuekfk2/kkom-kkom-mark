@@ -12,8 +12,12 @@ export interface BookmarkState {
   current: {
     url: string;
     bookmarkPage: number;
+    bookmarkInfo: BookmarkListType | null;
   };
-  list: BookmarkListType[][];
+  list: {
+    allList: BookmarkListType[];
+    list: BookmarkListType[][] | null;
+  };
   actions: {
     current: {
       updateCurrentUrl: (num: string) => void;
@@ -36,8 +40,12 @@ const useBookmarkStore = create<BookmarkState>()(
     current: {
       url: "",
       bookmarkPage: 0,
+      bookmarkInfo: null,
     },
-    list: [],
+    list: {
+      allList: [],
+      list: null,
+    },
     actions: {
       current: {
         updateCurrentUrl: (url) => {
@@ -54,8 +62,21 @@ const useBookmarkStore = create<BookmarkState>()(
       updateList: (data) => {
         set((state) => ({
           ...state,
-          list: splitArrayIntoSize(data, 8),
+          list: {
+            list: splitArrayIntoSize(data, 7),
+            allList: data,
+          },
         }));
+        set((state) => {
+          const nowBookmarkUrl = data.filter(
+            (data) => data.url === state.current.url
+          );
+          if (nowBookmarkUrl.length > 0) {
+            state.current.bookmarkInfo = nowBookmarkUrl[0];
+          } else {
+            state.current.bookmarkInfo = null;
+          }
+        });
       },
     },
   }))

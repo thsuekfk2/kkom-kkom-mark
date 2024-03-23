@@ -1,18 +1,10 @@
-import { useEffect } from "react";
-import { PlusIcon, LoadingIcon } from "../../components/Icons";
-import { bookmarkService } from "../../service/bookmark.servce";
-import {
-  useActions,
-  useBookmarkCurrent,
-  useBookmarkListData,
-} from "../../store/bookmark";
+import { useActions, useBookmarkCurrent } from "../../store/bookmark";
 import { Pagination } from "../../components/pagination/Pagination";
 import { BookmarkList } from "../../components/bookmark/BookmarkList";
 
 export const Popup = () => {
   const { updateList, current } = useActions();
-  const { url } = useBookmarkCurrent();
-  const list = useBookmarkListData();
+  const { bookmarkInfo } = useBookmarkCurrent();
 
   useEffect(() => {
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {

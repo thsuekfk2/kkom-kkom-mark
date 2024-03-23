@@ -9,7 +9,7 @@ import {
 } from "../../store/bookmark";
 
 export const BookmarkList = () => {
-  const list = useBookmarkListData();
+  const { list } = useBookmarkListData();
   const { url, bookmarkPage } = useBookmarkCurrent();
   const { updateList } = useActions();
 
