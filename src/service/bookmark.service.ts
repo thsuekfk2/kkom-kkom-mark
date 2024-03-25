@@ -36,7 +36,7 @@ export const bookmarkService = {
       .from("url")
       .select("*")
       .or(`url.ilike.*${text}*,description.ilike.*${text}*`)
-      .order("id");
+      .order("created_at", { ascending: false });
     return { data, error };
   },
 };
