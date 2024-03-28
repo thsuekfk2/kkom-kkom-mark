@@ -1,5 +1,4 @@
 import { useToast } from "@chakra-ui/react";
-import { PlusIcon } from "../Icons";
 import { bookmarkService } from "../../service/bookmark.service";
 import { useActions, useBookmarkCurrent } from "../../store/bookmark";
 
@@ -39,10 +38,10 @@ export const AddBookMark = () => {
 
   return (
     <div
-      className="flex cursor-pointer bg-slate-100 hover:bg-slate-200 p-3 rounded-lg w-full"
+      className="flex cursor-pointer bg-slate-100 hover:bg-slate-200 p-3 rounded-lg w-full h-[50px] items-center"
       onClick={saveBookmark}
     >
-      <PlusIcon height={20} width={20} />
+      <img src="/add.png" className="w-10" />
       <span className="ml-3">북마크 추가하기</span>
     </div>
   );

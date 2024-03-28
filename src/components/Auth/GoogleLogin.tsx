@@ -2,7 +2,6 @@ import { supabase } from "../../lib/supabase";
 import { bookmarkService } from "../../service/bookmark.service";
 import { useActions } from "../../store/bookmark";
 import { useSession } from "../../store/user";
-import { GoogleIcon } from "../Icons";
 
 export const GoogleLogin = () => {
   const { updateList } = useActions();
@@ -66,9 +65,9 @@ export const GoogleLogin = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center h-full w-full absolute gap-5">
+    <div className="absolute flex flex-col items-center justify-center w-full h-full gap-5">
       <div className="flex items-center justify-center w-5 h-5 rounded-full cursor-pointer bg-slate-100 left-5">
-        <GoogleIcon onClick={googleLogin} />
+        <img src="/google.png" onClick={googleLogin} />
       </div>
       <span>구글 로그인 후 이용해주세요.</span>
     </div>
