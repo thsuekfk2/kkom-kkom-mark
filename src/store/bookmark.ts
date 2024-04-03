@@ -24,6 +24,7 @@ export interface BookmarkState {
       updateCurrentPage: (page: number) => void;
     };
     updateList: (data: BookmarkListType[]) => void;
+    searchList: (data: BookmarkListType[]) => void;
   };
 }
 
@@ -77,6 +78,15 @@ const useBookmarkStore = create<BookmarkState>()(
             state.current.bookmarkInfo = null;
           }
         });
+      },
+      searchList: (data) => {
+        set((state) => ({
+          ...state,
+          list: {
+            list: splitArrayIntoSize(data, 7),
+            allList: data,
+          },
+        }));
       },
     },
   }))

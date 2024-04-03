@@ -8,12 +8,12 @@ import { useActions } from "../store/bookmark";
 export const Search = () => {
   const [searchText, setSearchText] = useState("");
   const debouncedQuery = useDebounce(searchText, 500);
-  const { updateList } = useActions();
+  const { searchList } = useActions();
 
   const searchBookmark = async (searchText: string) => {
     const { data } = await bookmarkService.select(searchText);
     if (data) {
-      updateList(data);
+      searchList(data);
     }
   };
 
