@@ -30,7 +30,7 @@ export const Popup = () => {
           await supabase.auth.setSession(result.session);
           const session = await getSession();
           setSession(session);
-          loadBookmarks();
+          await loadBookmarks();
         }
         setInitLoading(false);
       });
@@ -38,11 +38,14 @@ export const Popup = () => {
   }, []);
 
   useEffect(() => {
-    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    chrome.tabs.query(
+      { active: true, currentWindow: true },
+      async function (tabs) {
       const currentUrl = tabs[0].url ?? "";
       current.updateCurrentUrl(currentUrl);
-      loadBookmarks();
-    });
+        await loadBookmarks();
+      }
+    );
   }, []);
 
   const loadBookmarks = async () => {

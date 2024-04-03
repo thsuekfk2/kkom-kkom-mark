@@ -28,8 +28,7 @@ export const EditTextarea = ({ data }: any) => {
   };
 
   const saveDescription = async (url: string) => {
-    await bookmarkService.updateDescription(url, editRef.current);
-    loadBookmarks();
+    await loadBookmarks();
   };
 
   return (

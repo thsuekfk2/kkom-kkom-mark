@@ -57,7 +57,7 @@ export const GoogleLogin = () => {
 
             const session = await getSession();
             setSession(session);
-            loadBookmarks();
+            await loadBookmarks();
           }
         }
       }
