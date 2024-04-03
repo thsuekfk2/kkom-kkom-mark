@@ -1,5 +1,6 @@
 import { BookmarkListType } from "../../store/bookmark";
 import { ToolTip } from "../ui/ToolTip";
+import { EditInput } from "../EditInput";
 import dayjs from "dayjs";
 
 export const BookmarkItem = ({ data }: { data: BookmarkListType }) => {
@@ -38,36 +39,7 @@ export const BookmarkItem = ({ data }: { data: BookmarkListType }) => {
           {data.url.replace(/^https?:\/\//g, "")}
         </ToolTip>
       </div>
-      <div
-        onClick={() => {
-          setEditingData({ id: data.id, description: data.description });
-        }}
-      >
-        {editingData.id === data.id && (
-          <Input
-            variant="unstyled"
-            autoFocus
-            className="outline-none ml-2"
-            value={editingData.description}
-            onChange={(e) =>
-              setEditingData({ ...editingData, description: e.target.value })
-            }
-            onBlur={() => saveDescription(data.url)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                saveDescription(data.url);
-              }
-            }}
-          />
-        )}
-        {editingData.id !== data.id && data.description ? (
-          <div className="text-[#6e6e6e] w-[160px] ml-2">
-            <ToolTip label={data.description}>{data.description}</ToolTip>
-          </div>
-        ) : (
-          <span className="text-[#3384f681] ml-2">편집</span>
-        )}
-      </div>
+      <EditInput data={data} />
     </div>
   );
 };
