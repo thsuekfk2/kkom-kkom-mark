@@ -5,7 +5,7 @@ export const Pagination = () => {
   const { list } = useBookmarkListData();
 
   return (
-    <div className="flex flex-row items-center justify-center w-full gap-1">
+    <div className="flex flex-row items-center justify-center w-full gap-1 h-[50px]">
       {list?.map((_, i: number) => (
         <PageItem page={i + 1} key={i} />
       ))}

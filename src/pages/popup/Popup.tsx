@@ -41,8 +41,8 @@ export const Popup = () => {
     chrome.tabs.query(
       { active: true, currentWindow: true },
       async function (tabs) {
-      const currentUrl = tabs[0].url ?? "";
-      current.updateCurrentUrl(currentUrl);
+        const currentUrl = tabs[0].url ?? "";
+        current.updateCurrentUrl(currentUrl);
         await loadBookmarks();
       }
     );
@@ -64,7 +64,7 @@ export const Popup = () => {
       {session && (
         <div className="flex flex-col justify-center items-center h-full w-[90%]">
           <Logout />
-          <div className="flex h-[90px] w-full relative top-[20px]">
+          <div className="flex h-[90px] w-full items-center">
             {bookmarkInfo?.url ? (
               <div className="flex flex-row w-full">
                 <EditTextarea data={bookmarkInfo} />
@@ -73,8 +73,8 @@ export const Popup = () => {
               <AddBookMark />
             )}
           </div>
+          <Search />
           <div className="h-[320px] overflow-auto w-full">
-            <Search />
             <BookmarkList />
           </div>
           <Pagination />

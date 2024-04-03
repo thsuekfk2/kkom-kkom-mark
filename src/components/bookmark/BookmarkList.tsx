@@ -23,8 +23,10 @@ export const BookmarkList = () => {
         list[bookmarkPage]?.map((data: BookmarkListType, i) => (
           <div
             className={`flex flex-row w-full ${
-              url === data.url ? "bg-slate-200" : "bg-[#F1F4F6]"
-            } rounded-lg p-2 hover:bg-slate-200 justify-between`}
+              url === data.url
+                ? "bg-slate-300"
+                : "bg-[#F1F4F6] hover:bg-slate-200"
+            } rounded-lg p-2 justify-between`}
             key={i}
           >
             <BookmarkItem data={data} />
