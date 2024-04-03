@@ -1,25 +1,16 @@
 import { Editable, EditablePreview, EditableTextarea } from "@chakra-ui/react";
 import { bookmarkService } from "../../service/bookmark.service";
 import { useActions, useBookmarkCurrent } from "../../store/bookmark";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 export const EditTextarea = ({ data }: any) => {
-  const editRef = useRef<any>(data.description);
+  const [editingData, setEditingData] = useState("");
   const { bookmarkInfo } = useBookmarkCurrent();
   const { updateList } = useActions();
-  const divRef = useRef<any>(null);
-  const [hasScroll, setHasScroll] = useState(false);
   const [isOpenEdit, setOpenEdit] = useState(false);
 
   useEffect(() => {
-    const divElement = divRef.current;
-    if (divElement) {
-      const hasVerticalScrollbar =
-        divElement.scrollHeight > divElement.clientHeight;
-      setHasScroll(hasVerticalScrollbar);
-    }
-
-    editRef.current = data?.description;
+    setEditingData(data?.description);
   }, [bookmarkInfo]);
 
   const loadBookmarks = async () => {
@@ -28,45 +19,51 @@ export const EditTextarea = ({ data }: any) => {
   };
 
   const saveDescription = async (url: string) => {
+    if (editingData === "") {
+      setOpenEdit(false);
+    }
+
+    await bookmarkService.updateDescription(url, editingData);
     await loadBookmarks();
   };
 
   return (
     <div
-      className={`flex absolute w-full p-2 rounded-lg bg-slate-100 h-[55px] items-start justify-center  overflow-hidden transition-all duration-500 hover:${
-        hasScroll && "h-full"
-      }`}
+      className={`flex w-full p-2 rounded-lg bg-slate-100 h-[55px] items-start justify-center  overflow-hidden transition-all duration-500`}
     >
       {!bookmarkInfo?.description && !isOpenEdit ? (
         <div
           className="flex flex-row h-full items-center cursor-text"
           onClick={() => setOpenEdit(true)}
         >
-          <img src="/pencil.png" className="w-8 flex justify-center top-3 " />
-          <span className="flex">어떤 북마크 인가요 ?</span>
+          <img
+            src="/pencil.png"
+            className="w-8 flex justify-center top-3 opacity-50"
+          />
+          <span className="flex text-[#c7c7c7]">어떤 북마크 인가요 ?</span>
         </div>
       ) : (
         <Editable
-          ref={divRef}
           defaultValue={data.description}
-          value={editRef.current.value}
+          value={editingData}
           className="w-full h-full flex items-center ml-3 overflow-auto"
           startWithEditView={isOpenEdit ? true : false}
-          placeholder="북마크를 설명해 주세요"
+          placeholder={"북마크를 설명해 주세요"}
+          color={data.description || editingData ? "black" : "#c7c7c7"}
         >
-          <EditablePreview
-            alignContent={!hasScroll ? "center" : ""}
-            className="w-full h-full flex"
-          />
+          <EditablePreview className="w-full h-full flex" />
           <EditableTextarea
-            alignContent={!hasScroll ? "center" : ""}
+            _placeholder={{ color: "#c7c7c7" }}
             className="w-full h-full resize-none"
-            onBlur={() => saveDescription(data.url)}
+            onBlur={() => {
+              saveDescription(data.url);
+            }}
             onChange={(e) => {
-              editRef.current = e.target.value;
+              setEditingData(e.target.value);
             }}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
+                saveDescription(data.url);
                 e.currentTarget.blur();
               }
             }}
