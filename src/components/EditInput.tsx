@@ -32,15 +32,16 @@ export const EditInput = ({ data }: { data: BookmarkListType }) => {
       <Editable
         defaultValue={data.description}
         value={editingData}
-        placeholder="설명 추가"
-        className="w-full h-full flex items-center placeholder:text-slate-100"
-        color={data.description || editingData ? "black" : "#c7c7c7"}
+        placeholder="어떤 북마크 인가요 ?"
+        className="flex items-center w-full h-full placeholder:text-slate-100 focus:outline-none"
+        color={data.description || editingData ? "black" : "#a0a0a0"}
       >
         <ToolTip label={data.description}>
-          <EditablePreview className="w-full h-full flex" />
+          <EditablePreview className="flex w-full h-full" />
         </ToolTip>
         <EditableInput
-          _placeholder={{ color: "#c7c7c7" }}
+          _focusVisible={{ border: "none" }}
+          _placeholder={{ color: "#a0a0a0" }}
           onBlur={() => saveDescription(data.url)}
           onChange={(e) => {
             setEditingData(e.target.value);

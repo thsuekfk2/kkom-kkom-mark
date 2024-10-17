@@ -22,13 +22,14 @@ export const Search = () => {
   }, [debouncedQuery]);
 
   return (
-    <div className="flex w-full justify-end mb-2">
-      <div className="flex flex-row items-center">
-        <SearchIcon className="mr-2" />
+    <div className="flex justify-end w-full mb-2">
+      <div className="flex flex-row items-center  border border-[gray-200] p-1 rounded-lg">
+        <SearchIcon className="mt-1 mr-2" />
         <Input
+          size={"xs"}
           variant="unstyled"
           placeholder="검색하기"
-          className="outline-none w-[100px]"
+          className="outline-none w-[100px] text-xs placeholder:text-xs font-thin"
           onChange={(e) => setSearchText(e.target.value)}
         />
       </div>

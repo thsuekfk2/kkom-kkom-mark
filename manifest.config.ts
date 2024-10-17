@@ -11,36 +11,26 @@ const env = loadEnv("staging", process.cwd(), "");
 
 export default defineManifest(async (config) => ({
   manifest_version: 3,
-  name: config.mode === "staging" ? "[INTERNAL] Tools - EXE" : "Tools - EXE",
-  description: "응용프로그램 EXE App",
+  name: config.mode === "staging" ? "[INTERNAL] 꼼꼼마크" : "꼼꼼마크",
+  description: "오래 기억하고 싶은 URL을 저장하고 관리하세요.",
   version:
     label === "0"
       ? `${major}.${minor}.${patch}`
       : `${major}.${minor}.${patch}.${label}`,
   version_name: version,
-  oauth2: {
-    client_id: env.VITE_APP_GOOGLE_CLIENT_KEY,
-    scopes: ["openid", "email", "profile"],
-  },
   action: {
     default_title: "popup",
     default_popup: "src/pages/popup/index.html",
   },
   icons: {
-    "16": "e_image.png",
-    "48": "e_image.png",
-    "128": "e_image.png",
+    "16": "kkom.png",
+    "48": "kkom.png",
+    "128": "kkom.png",
   },
   background: {
     service_worker: "src/pages/background/index.ts",
     type: "module",
   },
-  content_scripts: [
-    {
-      matches: ["https://*/*", "http://*/*"],
-      js: ["src/pages/content/main.tsx"],
-    },
-  ],
   web_accessible_resources: [
     {
       resources: ["assets/js/*.js", "assets/css/*.css"],

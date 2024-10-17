@@ -26,8 +26,7 @@ export const AddBookMark = () => {
     if (error) {
       toast({
         title: "북마크 등록 실패",
-        description:
-          error.code === "23505" ? "이미 등록되어 있습니다." : "등록 실패",
+        description: "등록 실패",
         status: "error",
         duration: 1000,
         isClosable: true,
@@ -38,11 +37,13 @@ export const AddBookMark = () => {
 
   return (
     <div
-      className="flex cursor-pointer bg-slate-100 hover:bg-slate-200 p-3 rounded-lg w-full h-[50px] items-center"
+      className="flex cursor-pointer border border-[gray-200] hover:bg-gray-200 p-3 rounded-lg w-full h-[50px] items-center"
       onClick={saveBookmark}
     >
-      <img src="/add.png" className="w-10" />
-      <span className="ml-3">북마크 추가하기</span>
+      <span className="flex items-center justify-center w-full text-center">
+        <img src="/kkom.png" className="w-5 mr-3" />
+        새로운 북마크 추가
+      </span>
     </div>
   );
 };

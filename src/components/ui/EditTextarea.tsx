@@ -29,16 +29,16 @@ export const EditTextarea = ({ data }: any) => {
 
   return (
     <div
-      className={`flex w-full p-2 rounded-lg bg-slate-100 h-[55px] items-start justify-center  overflow-hidden transition-all duration-500`}
+      className={`flex w-full p-2 rounded-lg bg-gray-100 h-[55px] items-start justify-center  overflow-hidden transition-all duration-500`}
     >
       {!bookmarkInfo?.description && !isOpenEdit ? (
         <div
-          className="flex flex-row h-full items-center cursor-text"
+          className="flex flex-row items-center h-full cursor-text"
           onClick={() => setOpenEdit(true)}
         >
           <img
-            src="/pencil.png"
-            className="w-8 flex justify-center top-3 opacity-50"
+            src="/kkom.png"
+            className="flex justify-center w-5 mr-3 opacity-50 top-3"
           />
           <span className="flex text-[#c7c7c7]">어떤 북마크 인가요 ?</span>
         </div>
@@ -46,13 +46,14 @@ export const EditTextarea = ({ data }: any) => {
         <Editable
           defaultValue={data.description}
           value={editingData}
-          className="w-full h-full flex items-center ml-3 overflow-auto"
+          className="flex items-center w-full h-full ml-3 overflow-auto placeholder:text-red-500"
           startWithEditView={isOpenEdit ? true : false}
           placeholder={"북마크를 설명해 주세요"}
           color={data.description || editingData ? "black" : "#c7c7c7"}
         >
-          <EditablePreview className="w-full h-full flex" />
+          <EditablePreview className="flex w-full h-full" />
           <EditableTextarea
+            _focusVisible={{ border: "none" }}
             _placeholder={{ color: "#c7c7c7" }}
             className="w-full h-full resize-none"
             onBlur={() => {

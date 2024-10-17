@@ -27,7 +27,7 @@ export const BookmarkItem = ({ data }: { data: BookmarkListType }) => {
   };
 
   return (
-    <div className="flex flex-row w-full h-full overflow-hidden text-nowrap">
+    <div className="flex flex-row items-center w-full h-full overflow-hidden text-nowrap">
       <div className="min-w-[50px] text-[#8b95a1] text-[10px] flex items-center">
         {getTimeDifference()}
       </div>
