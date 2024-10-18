@@ -36,7 +36,7 @@ export const BookmarkItem = ({ data }: { data: BookmarkListType }) => {
         onClick={() => moveToPage(data.url)}
       >
         <ToolTip label={data.url}>
-          {data.url.replace(/^https?:\/\//g, "")}
+          {data.url.replace(/^(https?:\/\/)?(www\.)?/g, "")}
         </ToolTip>
       </div>
       <EditInput data={data} />
