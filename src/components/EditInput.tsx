@@ -32,7 +32,7 @@ export const EditInput = ({ data }: { data: BookmarkListType }) => {
       <Editable
         defaultValue={data.description}
         value={editingData}
-        placeholder="어떤 북마크 인가요 ?"
+        placeholder="북마크를 설명해 주세요"
         className="flex items-center w-full h-full placeholder:text-slate-100 focus:outline-none"
         color={data.description || editingData ? "black" : "#a0a0a0"}
       >

@@ -82,6 +82,10 @@ const useBookmarkStore = create<BookmarkState>()(
       searchList: (data) => {
         set((state) => ({
           ...state,
+          current: {
+            ...state.current,
+            bookmarkPage: 0,
+          },
           list: {
             list: splitArrayIntoSize(data, 7),
             allList: data,
