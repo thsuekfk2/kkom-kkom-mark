@@ -12,20 +12,31 @@ export const Popup = () => {
   const { bookmarkInfo } = useBookmarkCurrent();
 
   useEffect(() => {
-    chrome.tabs.query(
-      { active: true, currentWindow: true },
-      async function (tabs) {
-        const currentUrl = tabs[0].url ?? "";
+    const fetchBookmarks = async () => {
+      try {
+        const tabs = await chrome.tabs.query({
+          active: true,
+          currentWindow: true,
+        });
+        const currentUrl = tabs[0]?.url || "";
         current.updateCurrentUrl(currentUrl);
-        await loadBookmarks();
-      }
-    );
-  }, []);
 
-  const loadBookmarks = async () => {
-    const { data } = await bookmarkService.fetch();
-    updateList(data);
-  };
+        const { data } = await bookmarkService.fetch();
+        updateList(data);
+
+        const bookmarkIndex = data.findIndex(
+          (bookmark) => bookmark.url === currentUrl
+        );
+        const bookmarkPage =
+          bookmarkIndex !== -1 ? Math.max(0, Math.floor(bookmarkIndex / 7)) : 0;
+        current.updateCurrentPage(bookmarkPage);
+      } catch (error) {
+        console.error("Failed to load bookmarks", error);
+      }
+    };
+
+    fetchBookmarks();
+  }, []);
 
   return (
     <div className="flex flex-col bg-white items-center w-[400px] h-[450px] ">
