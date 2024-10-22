@@ -1,17 +1,17 @@
 import { defineManifest } from "@crxjs/vite-plugin";
 import packageJson from "./package.json";
-import { loadEnv } from "vite";
 const { version } = packageJson;
 
 const [major, minor, patch, label = "0"] = version
   .replace(/[^\d.-]+/g, "")
   .split(/[.-]/);
 
-const env = loadEnv("staging", process.cwd(), "");
-
 export default defineManifest(async (config) => ({
   manifest_version: 3,
-  name: config.mode === "staging" ? "[INTERNAL] 꼼꼼마크" : "꼼꼼마크",
+  name:
+    config.mode === "staging"
+      ? "[INTERNAL] 북마크를 간단하게, 꼼꼼마크"
+      : "북마크를 간단하게, 꼼꼼마크",
   description: "오래 기억하고 싶은 URL을 저장하고 관리하세요.",
   version:
     label === "0"
